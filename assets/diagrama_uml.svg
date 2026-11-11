@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 800" width="760" height="800" font-family="Courier New, monospace" font-size="13">
+  <rect width="760" height="800" fill="#ffffff"/>
+  <text x="40" y="38" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1a1f2e">Diagrama UML - Sistema de flota para logistica urbana (Avance 2)</text>
+
+  <!-- Clase base -->
+  <g stroke="#1a1f2e" stroke-width="1.5">
+    <rect x="120" y="65" width="520" height="34" fill="#dbe5fa"/>
+    <rect x="120" y="99" width="520" height="134" fill="#f9f9ff"/>
+    <rect x="120" y="233" width="520" height="134" fill="#f9f9ff"/>
+  </g>
+  <text x="380" y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1a1f2e">VehiculoLogistica</text>
+  <g fill="#1a1f2e">
+    <text x="132" y="122">+ INTERVALO_SERVICIO_KM: int = 10000</text>
+    <text x="132" y="141">+ marca_modelo: str</text>
+    <text x="132" y="160">+ anio: int</text>
+    <text x="132" y="179">+ entregas_completadas: int</text>
+    <text x="132" y="198">+ en_servicio: bool</text>
+    <text x="132" y="217">- __kilometraje: float</text>
+    <text x="132" y="256">+ __init__(marca_modelo, anio, kilometraje_inicial, en_servicio)</text>
+    <text x="132" y="275">+ kilometraje: float  &lt;&lt;property get/set&gt;&gt;</text>
+    <text x="132" y="294">+ registrar_entrega(distancia_km)</text>
+    <text x="132" y="313">+ cambiar_estado(estado)</text>
+    <text x="132" y="332">+ evaluar_mantenimiento()</text>
+    <text x="132" y="351">+ mostrar_info()</text>
+  </g>
+
+  <!-- Flecha de herencia: de la subclase hacia la superclase -->
+  <line x1="380" y1="477" x2="380" y2="389" stroke="#1a1f2e" stroke-width="1.6"/>
+  <polygon points="380,367 365,389 395,389" fill="#ffffff" stroke="#1a1f2e" stroke-width="1.6"/>
+  <text x="404" y="430" font-family="Arial, sans-serif" font-size="13" fill="#1a1f2e">hereda de (generalizacion)</text>
+
+  <!-- Subclase -->
+  <g stroke="#1a1f2e" stroke-width="1.5">
+    <rect x="120" y="477" width="520" height="34" fill="#dbe5fa"/>
+    <rect x="120" y="511" width="520" height="77" fill="#f9f9ff"/>
+    <rect x="120" y="588" width="520" height="115" fill="#f9f9ff"/>
+  </g>
+  <text x="380" y="500" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1a1f2e">MotoReparto</text>
+  <g fill="#1a1f2e">
+    <text x="132" y="534">+ cilindrada_cc: int</text>
+    <text x="132" y="553">+ capacidad_caja_kg: float</text>
+    <text x="132" y="572"># _carga_actual_kg: float</text>
+    <text x="132" y="611">+ __init__(marca_modelo, anio, kilometraje_inicial,</text>
+    <text x="132" y="630" xml:space="preserve">           cilindrada_cc, capacidad_caja_kg, en_servicio)</text>
+    <text x="132" y="649">+ cargar_paquete(peso_kg)</text>
+    <text x="132" y="668">+ evaluar_mantenimiento()   &lt;&lt;override&gt;&gt;</text>
+    <text x="132" y="687">+ mostrar_info()            &lt;&lt;override&gt;&gt;</text>
+  </g>
+
+  <text x="120" y="740" font-family="Arial, sans-serif" font-size="13" fill="#1a1f2e">Visibilidad:   + publico     - privado     # protegido</text>
+</svg>
