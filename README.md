@@ -1,21 +1,29 @@
 # Sistema de control de flota para logística urbana
 
-Proyecto personal de **Programación Orientada a Objetos** — Avance 2
+Proyecto personal de **Programación Orientada a Objetos** — Avance 3 Final: Composición y Módulos
 Alumno: Álvaro Joseph Ramírez Pulido
 
 ## De qué trata
 
-Modela los vehículos que trabajan en plataformas de entrega a domicilio. Cada unidad lleva su propio kilometraje, entregas completadas y estado de servicio.
+Modela los vehículos que trabajan en plataformas de entrega a domicilio. Cada unidad lleva su propio kilometraje, entregas completadas, estado de servicio, su conductor asignado y, en el caso de las motos, los paquetes que lleva en la caja.
 
-## Qué se agregó en el Avance 2
+## Estructura del proyecto
 
-| Requisito | Dónde está en `main.py` |
+~~~
+flota-logistica-poo/
+├── modelos.py               Clases: Conductor, Paquete, VehiculoLogistica, MotoReparto
+├── main.py                  Importaciones, creación de objetos y pruebas
+└── assets/diagrama_uml.svg  Diagrama UML actualizado
+~~~
+
+## Qué se agregó en el Avance 3
+
+| Requisito | Cómo quedó |
 |---|---|
-| Encapsulamiento | `__kilometraje` es privado y se controla con `@property` y un setter que rechaza valores negativos o menores al actual. |
-| Herencia | `MotoReparto` hereda de `VehiculoLogistica` y usa `super().__init__()`. Agrega `cilindrada_cc` y `capacidad_caja_kg`. |
-| Sobrescritura (polimorfismo) | `MotoReparto` sobrescribe `evaluar_mantenimiento()` y `mostrar_info()`. |
-| Métodos operativos | `registrar_entrega`, `cambiar_estado`, `evaluar_mantenimiento`, `mostrar_info` y `cargar_paquete`. |
-| Pruebas | 3 objetos: 1 `VehiculoLogistica` y 2 `MotoReparto`. |
+| Composición | `VehiculoLogistica` **tiene un** `Conductor` y delega en sus métodos (`registrar_viaje()`, `presentarse()`). `MotoReparto` **tiene una** lista de objetos `Paquete`; su carga se calcula con el peso de cada paquete. |
+| Clases auxiliares | `Conductor` y `Paquete`, independientes de la jerarquía de vehículos. |
+| Modularización | `modelos.py` contiene solo las clases; `main.py` solo hace `from modelos import ...` y las pruebas. |
+| Avances anteriores | Se conservan el encapsulamiento (`__kilometraje` con `@property`), la herencia (`MotoReparto` con `super()`) y el polimorfismo (`evaluar_mantenimiento()` y `mostrar_info()` sobrescritos). |
 
 ## Cómo ejecutarlo
 
@@ -25,43 +33,6 @@ python main.py
 
 ## Diagrama UML
 
-Imagen: [assets/diagrama_uml.svg](assets/diagrama_uml.svg)
-
 ![Diagrama UML](assets/diagrama_uml.svg)
 
-El mismo diagrama en Mermaid:
-
-~~~mermaid
-classDiagram
-    class VehiculoLogistica {
-        +int INTERVALO_SERVICIO_KM
-        +str marca_modelo
-        +int anio
-        +int entregas_completadas
-        +bool en_servicio
-        -float __kilometraje
-        +kilometraje() float
-        +registrar_entrega(distancia_km)
-        +cambiar_estado(estado)
-        +evaluar_mantenimiento()
-        +mostrar_info()
-    }
-    class MotoReparto {
-        +int cilindrada_cc
-        +float capacidad_caja_kg
-        #float _carga_actual_kg
-        +cargar_paquete(peso_kg)
-        +evaluar_mantenimiento()
-        +mostrar_info()
-    }
-    VehiculoLogistica <|-- MotoReparto
-~~~
-
-Visibilidad: `+` público, `-` privado, `#` protegido. La flecha va de la subclase `MotoReparto` hacia la superclase `VehiculoLogistica`.
-
-## Estructura
-
-~~~
-main.py                    Código del sistema
-assets/diagrama_uml.svg    Diagrama UML (imagen)
-~~~
+Visibilidad: `+` público, `-` privado, `#` protegido. Rombo relleno = composición; triángulo hueco = herencia.
